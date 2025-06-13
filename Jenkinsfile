@@ -3,6 +3,10 @@ parameters {
 }
 pipeline {
     agent any
+    tools {
+    maven 'Maven 3.8.1' // Name must match your Jenkins config
+}
+
     environment {
     MY_VERSION = '1.0.0'
 }
@@ -11,6 +15,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 echo "Version: ${env.MY_VERSION}"
+                bat 'mvn install'
             }
         }
         stage('Test') {
